@@ -23,8 +23,6 @@ def is_valid(s):
         # print('min and max length test - passed', end=' ')
         # print('no punctuation marks test - passed')
 
-        #alphabetical start check
-        # if re.search(alphabetical_pattern, s):      # start from here tomorrow
 
             if re.match(two_first_letters_pattern, s):
                 # print('two first letters test - passed')
@@ -50,14 +48,7 @@ def is_valid(s):
                             # print('number does not start with zero test - passed')
                             if not re.search(number_interrupted_by_letter_patter, s):
                                 # print('number interrupted by a letter test - passed')
-
-                                # alphabetical start check
-                                if not re.search(alphabetical_pattern, s):  # start from here tomorrow
-                                    return False
-                                else:
-                                    return True
-
-                                # return True
+                                return True
                             else:
                                 return False
                         else:
@@ -66,13 +57,11 @@ def is_valid(s):
                         return False
                 else:
                     return True
-
             else:
                 return False
+
     else:
         return False
-
-
 
 
 if __name__ == "__main__":

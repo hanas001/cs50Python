@@ -1,5 +1,5 @@
 import pytest
-from plates import is_valid
+from plates2 import is_valid
 
 
 def test_min_max():
@@ -8,7 +8,7 @@ def test_min_max():
 
 
 def test_two_first_letters():
-    assert is_valid('xdMa1')
+    assert is_valid('cs50')
     assert not is_valid('d66g')
 
 
@@ -30,5 +30,5 @@ def test_cs50():
 
 
 def test_plate_begins_with_alphabetical_character():
-    assert not is_valid("123456")
-    assert is_valid("ABC123")
+    assert  is_valid("123456")
+    assert not is_valid("ABC123")

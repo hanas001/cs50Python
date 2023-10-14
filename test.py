@@ -1,16 +1,13 @@
-wishes = ["I love you",
-            "a little",
-            "a lot",
-            "passionately",
-            "madly",
-            "not at all",
-            ]
+import re
 
-petals = int(input('amount of petals: '))
+def is_valid(s):
+    regex = r'^([^A-Za-z])'
+    match = re.match(regex, s)
+    return bool(match)
 
-for petal in range(petals):
-    index = petal%len(wishes)
-    last_wish = wishes[petal%len(wishes)]
-
-print(last_wish)
-print(index)
+if __name__ == "__main__":
+    plate = input("Plate: ").rstrip('\n').rstrip(' ')
+    if is_valid(plate):
+        print("Valid")
+    else:
+        print("Invalid")

@@ -41,7 +41,18 @@ elif len(arg) == 2:
                     overlayed_image_size = overlayd_image.size
                     # print(f'size of an image {full_name_in} is {overlayed_image_size}')
 
-                    width, height = overlayed_image_size
+                    # Resize the image
+                    image_ratio = overlayed_image_size[-1] / overlayed_image_size[0]
+                    # print('image ratio', image_ratio)
+                    width_overlayed = int(size_shirt[0] * (overlayed_image_size[0] / overlayed_image_size[0]))
+                    height_overlayed = int(width_overlayed * image_ratio)
+                    # print("first coordinate", width_overlayed)
+                    # print("second coordinate", height_overlayed)
+                    overlayd_image = overlayd_image.resize((width_overlayed, height_overlayed))
+
+
+
+                    width, height = width_overlayed, height_overlayed
                     # Calculate the coordinates of the square region to be cropped.
                     square_size = min(width, height)
                     x_offset = (width - square_size) // 2
@@ -50,17 +61,12 @@ elif len(arg) == 2:
                     # Crop the image.
                     overlayd_image = overlayd_image.crop((x_offset, y_offset, x_offset + square_size, y_offset + square_size))
 
-                    # Resize the image
-                    overlayd_image = overlayd_image.resize((size_shirt[0], size_shirt[-1]))
 
-                    # shirt = shirt.resize((square_size, square_size))
-                    # size_shirt = shirt.size
-                    # print(f'New size of an image "shirt.png" is {size_shirt}')
-
+                    # Overlay tshirt over the image
                     overlayd_image.paste(shirt, shirt)
-                    # overlayd_image = overlayd_image.resize((size_shirt[0], size_shirt[-1]))
                     overlayd_image.save(full_name_out)
                     # print(f'Write of an image{full_name_out} successful!')
+
 
                 except FileNotFoundError:
                     sys.exit('Input does not exist')
@@ -69,9 +75,6 @@ elif len(arg) == 2:
             else:
                 sys.exit('Input and output have different extensions')
 
-
-            # except FileNotFoundError:
-            #     sys.exit(f'Could not read {full_name_in} or {full_name_out}')
         else:
             sys.exit('Invalid output')
     except ValueError:

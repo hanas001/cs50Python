@@ -1,19 +1,15 @@
-extensions = ['jpg', 'png', 'jpeg']
+from fpdf import FPDF
 
-extension_in = 'jpg'
-extension_out = 'bmp'
+pdf = FPDF()
 
-extension_in = extension_in.lower()
-extension_out = extension_out.lower()
-print(f'First ext is {extension_in} and second ext is {extension_out}')
+pdf.add_page()
 
-if extension_in in extensions and extension_out in extensions:
-    print('Extensions are in the list')
+pdf.set_xy(0, 0)
+pdf.set_font('helvetica', 'B', 16)
+pdf.cell(60)
+pdf.cell(75, 10, 'Centered Image', 0, 2, 'C')
 
-    if extension_in == extension_out:
-        print('Extensions are the same')
-    else:
-        print('Input and output have different extensions')
+# Load image and get its original size
+pdf.image('shirtificate/shirtificate.png', x=pdf.w/2-50, y=pdf.h/2-50, w=100, h=100)
 
-else:
-    print('Extensions are NOT in the list')
+pdf.output('test_pdf_with_centered_image.pdf', 'F')
